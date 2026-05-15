@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GIF Theme Generator</title>
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">gif-theme-gen</span>
+      </div>
+      <nav class="header-nav">
+        <a href="#demo" class="nav-link">Demo</a>
+        <a href="#themes" class="nav-link">Themes</a>
+        <a href="#usage" class="nav-link">Usage</a>
+        <a href="https://github.com" class="btn-github" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          Star on GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg">
+        <canvas id="heroBg" aria-hidden="true"></canvas>
+      </div>
+      <div class="hero-content">
+        <div class="badge">Open Source · MIT License</div>
+        <h1 class="hero-title">
+          Animate the<br>
+          <span class="accent">aesthetic.</span>
+        </h1>
+        <p class="hero-sub">A zero-dependency canvas animation library with 6 hand-crafted themes. Drop it in, customize with sliders, export as GIF.</p>
+        <div class="hero-actions">
+          <a href="#demo" class="btn-primary">Try it live</a>
+          <code class="install-cmd">npm install gif-theme-gen</code>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">6</span> themes</div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-num">0</span> dependencies</div>
+          <div class="stat-div"></div>
+          <div class="stat"><span class="stat-num">4kb</span> gzipped</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Demo -->
+    <section class="demo-section" id="demo">
+      <div class="section-label">// live demo</div>
+      <h2 class="section-title">Play with it</h2>
+
+      <div class="demo-layout">
+        <div class="canvas-panel">
+          <div class="canvas-chrome">
+            <div class="chrome-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="chrome-title">preview.canvas</span>
+          </div>
+          <canvas id="mainCanvas" width="640" height="300"></canvas>
+          <div class="canvas-footer">
+            <span class="rec-badge">● REC</span>
+            <span id="frameCount" class="frame-count">0000</span>
+          </div>
+        </div>
+
+        <div class="controls-panel">
+          <div class="ctrl-section">
+            <div class="ctrl-label">Theme</div>
+            <div class="theme-grid" id="themeGrid">
+              <button class="theme-card active" data-theme="retro">
+                <span class="theme-icon">📼</span>
+                <span class="theme-name">Retro</span>
+              </button>
+              <button class="theme-card" data-theme="neon">
+                <span class="theme-icon">🌆</span>
+                <span class="theme-name">Neon City</span>
+              </button>
+              <button class="theme-card" data-theme="sunset">
+                <span class="theme-icon">🌅</span>
+                <span class="theme-name">Sunset</span>
+              </button>
+              <button class="theme-card" data-theme="matrix">
+                <span class="theme-icon">💻</span>
+                <span class="theme-name">Matrix</span>
+              </button>
+              <button class="theme-card" data-theme="space">
+                <span class="theme-icon">🪐</span>
+                <span class="theme-name">Space</span>
+              </button>
+              <button class="theme-card" data-theme="ocean">
+                <span class="theme-icon">🌊</span>
+                <span class="theme-name">Ocean</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="ctrl-section">
+            <div class="ctrl-label">Speed <span class="ctrl-val" id="speedVal">5</span></div>
+            <input type="range" id="speedRange" min="1" max="10" value="5" class="slider">
+          </div>
+
+          <div class="ctrl-section">
+            <div class="ctrl-label">Density <span class="ctrl-val" id="densityVal">5</span></div>
+            <input type="range" id="densityRange" min="1" max="10" value="5" class="slider">
+          </div>
+
+          <div class="ctrl-actions">
+            <button id="playPauseBtn" class="btn-ctrl">⏸ Pause</button>
+            <button id="resetBtn" class="btn-ctrl">↺ Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Themes showcase -->
+    <section class="themes-section" id="themes">
+      <div class="section-label">// themes</div>
+      <h2 class="section-title">Six moods. Infinite possibilities.</h2>
+      <div class="themes-grid">
+        <div class="theme-showcase retro-card">
+          <div class="showcase-preview" data-preview="retro"></div>
+          <div class="showcase-info">
+            <h3>Retro Wave</h3>
+            <p>Scanlines, synthwave particles, and that unmistakable 80s glow.</p>
+            <code>GifTheme.use('retro')</code>
+          </div>
+        </div>
+        <div class="theme-showcase neon-card">
+          <div class="showcase-preview" data-preview="neon"></div>
+          <div class="showcase-info">
+            <h3>Neon City</h3>
+            <p>Perspective grid, electric beams, cyberpunk geometry.</p>
+            <code>GifTheme.use('neon')</code>
+          </div>
+        </div>
+        <div class="theme-showcase sunset-card">
+          <div class="showcase-preview" data-preview="sunset"></div>
+          <div class="showcase-info">
+            <h3>Sunset</h3>
+            <p>Golden horizon, gradient sky, drifting orbs at dusk.</p>
+            <code>GifTheme.use('sunset')</code>
+          </div>
+        </div>
+        <div class="theme-showcase matrix-card">
+          <div class="showcase-preview" data-preview="matrix"></div>
+          <div class="showcase-info">
+            <h3>Matrix</h3>
+            <p>Classic falling character rain. Green. Minimal. Iconic.</p>
+            <code>GifTheme.use('matrix')</code>
+          </div>
+        </div>
+        <div class="theme-showcase space-card">
+          <div class="showcase-preview" data-preview="space"></div>
+          <div class="showcase-info">
+            <h3>Deep Space</h3>
+            <p>Drifting stars, soft nebula clouds, the void in motion.</p>
+            <code>GifTheme.use('space')</code>
+          </div>
+        </div>
+        <div class="theme-showcase ocean-card">
+          <div class="showcase-preview" data-preview="ocean"></div>
+          <div class="showcase-info">
+            <h3>Ocean Deep</h3>
+            <p>Rising bubbles, layered waves, deep water atmosphere.</p>
+            <code>GifTheme.use('ocean')</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage -->
+    <section class="usage-section" id="usage">
+      <div class="section-label">// usage</div>
+      <h2 class="section-title">Get started in 30 seconds</h2>
+      <div class="usage-grid">
+        <div class="usage-step">
+          <div class="step-num">01</div>
+          <h3>Install</h3>
+          <div class="code-block">
+            <pre><code>npm install gif-theme-gen
+# or
+yarn add gif-theme-gen</code></pre>
+          </div>
+        </div>
+        <div class="usage-step">
+          <div class="step-num">02</div>
+          <h3>Import & Initialize</h3>
+          <div class="code-block">
+            <pre><code>import GifTheme from 'gif-theme-gen';
+
+const gen = new GifTheme({
+  canvas: document.getElementById('c'),
+  theme: 'neon',
+  speed: 5,
+  density: 7
+});</code></pre>
+          </div>
+        </div>
+        <div class="usage-step">
+          <div class="step-num">03</div>
+          <h3>Control & Export</h3>
+          <div class="code-block">
+            <pre><code>gen.play();
+gen.pause();
+gen.setTheme('matrix');
+
+// Export as GIF (uses gif.js)
+gen.export({ fps: 24, duration: 3000 })
+   .then(blob => saveAs(blob, 'my.gif'));</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-logo">◈ gif-theme-gen</div>
+        <div class="footer-links">
+          <a href="#">MIT License</a>
+          <a href="#">Changelog</a>
+          <a href="#">Contributing</a>
+          <a href="https://github.com" target="_blank">GitHub ↗</a>
+        </div>
+        <div class="footer-credit">Built with Canvas API · No dependencies</div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="src/themes.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>

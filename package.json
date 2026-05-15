@@ -1,0 +1,15 @@
+{
+  "name": "gif-theme-gen",
+  "version": "0.1.0",
+  "description": "Zero-dependency canvas animation library with 6 hand-crafted GIF themes",
+  "main": "src/themes.js",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server ."
+  },
+  "keywords": ["gif", "canvas", "animation", "theme", "retro", "neon", "matrix"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
