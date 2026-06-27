@@ -1,115 +1,199 @@
-# ◈ gif-theme-gen
+<div align="center">
 
-> A zero-dependency canvas animation library with 6 hand-crafted themes. Drop it in, customize with sliders, export as GIF.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,50:6D28D9,100:06B6D4&height=250&section=header&text=GIF%20Theme%20Generator&fontSize=48&fontColor=ffffff&animation=fadeIn"/>
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![npm version](https://img.shields.io/badge/npm-0.1.0-brightgreen)](https://npmjs.com)
-[![zero dependencies](https://img.shields.io/badge/dependencies-0-success)](package.json)
-[![gzipped](https://img.shields.io/badge/gzipped-4kb-informational)](src/themes.js)
+# 🎨 GIF Theme Generator
+
+### Beautiful Canvas Animations • Zero Dependencies • Fully Customizable
+
+<p>
+
+<img src="https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?style=for-the-badge&logo=javascript">
+<img src="https://img.shields.io/badge/Canvas-HTML5-E34F26?style=for-the-badge&logo=html5">
+<img src="https://img.shields.io/badge/Zero-Dependencies-success?style=for-the-badge">
+<img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge">
+
+</p>
+
+<img src="https://readme-typing-svg.demolab.com?font=Poppins&size=22&pause=1000&color=7C3AED&center=true&width=850&lines=Canvas+Animation+Engine;Six+Built-in+Themes;GIF+Export;Pure+JavaScript;No+Frameworks;Lightweight+and+Fast"/>
+
+### ✨ Create stunning animated backgrounds and export them as GIFs.
+
+</div>
 
 ---
 
-## Themes
+# 🌍 Overview
 
-| Theme | Key |
-|-------|-----|
-| 📼 Retro Wave | `retro` |
-| 🌆 Neon City | `neon` |
-| 🌅 Sunset | `sunset` |
-| 💻 Matrix | `matrix` |
-| 🪐 Deep Space | `space` |
-| 🌊 Ocean Deep | `ocean` |
+**GIF Theme Generator** is a lightweight JavaScript animation engine that creates customizable canvas-based animated themes.
+
+It includes six built-in visual styles and allows developers to create their own themes with a simple rendering API.
+
+Perfect for:
+
+- Portfolio websites
+- Landing pages
+- Hero sections
+- Digital artwork
+- Animated wallpapers
+- Interactive web experiences
 
 ---
 
-## Installation
+# 🚀 Features
+
+| Feature | Description |
+|----------|-------------|
+| 🎨 Six Built-in Themes | Ready-to-use animated presets |
+| ⚡ Real-time Rendering | Smooth HTML5 Canvas animations |
+| 🎛 Live Controls | Adjust speed, density and themes instantly |
+| 🖼 GIF Export | Export animations as GIFs |
+| 🌈 Theme API | Build custom animation themes |
+| 🚫 Zero Dependencies | Pure JavaScript implementation |
+| 📱 Responsive | Works across desktop and mobile |
+
+---
+
+# 🎭 Available Themes
+
+| Theme | Preview |
+|--------|---------|
+| 📼 Retro Wave | Neon synthwave animation |
+| 🌆 Neon City | Cyberpunk skyline |
+| 🌅 Sunset | Warm animated gradient |
+| 💻 Matrix | Digital rain |
+| 🪐 Deep Space | Cosmic particles |
+| 🌊 Ocean Deep | Underwater animation |
+
+---
+
+# 🖼 Preview
+
+<div align="center">
+
+### 🎥 Demo
+
+*Add an animated GIF here*
+
+</div>
+
+---
+
+# 🏗 Engine Workflow
+
+```text
+User Settings
+      │
+      ▼
+Animation Engine
+      │
+      ▼
+Theme Renderer
+      │
+      ▼
+Canvas Drawing
+      │
+      ▼
+Interactive Preview
+      │
+      ▼
+GIF Export
+```
+
+---
+
+# ⚙ Installation
+
+Install via npm
 
 ```bash
 npm install gif-theme-gen
-# or
+```
+
+or
+
+```bash
 yarn add gif-theme-gen
 ```
 
-Or just drop `src/themes.js` into your HTML — no build step required.
+No build process required.
+
+Simply include the library and start rendering.
 
 ---
 
-## Usage
+# 🚀 Quick Start
 
-### Basic
+```javascript
+import GifTheme from "gif-theme-gen";
 
-```js
-import GifTheme from 'gif-theme-gen';
-
-const gen = new GifTheme({
-  canvas: document.getElementById('myCanvas'),
-  theme: 'neon',
-  speed: 5,      // 1–10
-  density: 7,    // 1–10
+const animation = new GifTheme({
+  canvas: document.querySelector("#canvas"),
+  theme: "neon",
+  speed: 5,
+  density: 7
 });
 
-gen.play();
-```
-
-### Controls
-
-```js
-gen.pause();
-gen.toggle();           // play/pause
-gen.setTheme('matrix'); // switch theme live
-gen.setSpeed(8);
-gen.setDensity(3);
-gen.reset();            // reset frame counter & particles
-```
-
-### Export as GIF
-
-```js
-// Requires gif.js (https://jnordberg.github.io/gif.js/)
-gen.export({ fps: 24, duration: 3000 })
-   .then(blob => saveAs(blob, 'animation.gif'));
+animation.play();
 ```
 
 ---
 
-## Options
+# 🎮 API
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `canvas` | `HTMLCanvasElement` | required | Target canvas element |
-| `theme` | `string` | `'retro'` | Initial theme name |
-| `speed` | `number` | `5` | Animation speed (1–10) |
-| `density` | `number` | `5` | Particle density (1–10) |
-| `onFrame` | `function` | — | Callback on each frame with frame number |
+```javascript
+animation.play()
 
----
+animation.pause()
 
-## Custom Themes
+animation.toggle()
 
-```js
-GifThemeEngine.THEMES['myTheme'] = {
-  bg: '#0a0010',
-  title: 'MY THEME',
-  palette: ['#ff00ff', '#00ffff', '#ffff00'],
-  render: (ctx, W, H, th, frame, speed, density, state) => {
-    ctx.fillStyle = th.bg;
-    ctx.fillRect(0, 0, W, H);
-    // your drawing code here
-  },
-};
+animation.reset()
+
+animation.setTheme("matrix")
+
+animation.setSpeed(8)
+
+animation.setDensity(3)
+
+animation.export()
 ```
 
 ---
 
-## Project Structure
+# 🎨 Create Custom Themes
 
+```javascript
+GifThemeEngine.THEMES.myTheme = {
+    bg:"#111",
+    palette:["#00ffff","#ff00ff"],
+
+    render(ctx,width,height,theme,frame){
+
+        // Draw anything you like
+
+    }
+}
 ```
-gif-theme-generator/
-├── index.html        ← Project landing page
-├── src/
-│   ├── themes.js     ← Core animation engine
-│   ├── main.js       ← Page UI wiring
-│   └── style.css     ← Landing page styles
+
+---
+
+# 📂 Project Structure
+
+```text
+📦 gif-theme-generator
+
+├── 📄 index.html
+├── 📂 src
+│
+├── 📄 themes.js
+├── 📄 main.js
+├── 📄 style.css
+│
+├── 📂 assets
+│
+├── 📂 screenshots
+│
 ├── README.md
 ├── package.json
 └── LICENSE
@@ -117,16 +201,75 @@ gif-theme-generator/
 
 ---
 
-## Contributing
+# 💻 Technology Stack
 
-PRs welcome! To add a new theme:
-
-1. Add a render function to `src/themes.js`
-2. Register it in `GifThemeEngine.THEMES`
-3. Add a card to the showcase in `index.html`
+| Technology | Purpose |
+|------------|----------|
+| JavaScript | Animation Engine |
+| HTML5 Canvas | Rendering |
+| HTML5 | Demo Application |
+| CSS3 | User Interface |
 
 ---
 
-## License
+# 🎯 Skills Demonstrated
 
-MIT © 2025
+- JavaScript
+- HTML5 Canvas
+- Animation Programming
+- Graphics Rendering
+- Library Development
+- API Design
+- Performance Optimization
+- Responsive Design
+
+---
+
+# 🌟 Why GIF Theme Generator?
+
+Unlike traditional animation libraries, **GIF Theme Generator** focuses on lightweight performance and simplicity.
+
+It enables developers to build visually engaging animated backgrounds without requiring frameworks or large dependencies.
+
+---
+
+# 🔮 Future Roadmap
+
+- 🎬 MP4 Export
+- 🎵 Audio-Reactive Themes
+- 🌈 Gradient Editor
+- ☁ Cloud Theme Gallery
+- 🎮 Mouse Interaction
+- 🌐 WebGL Rendering
+- 🧠 AI Theme Generator
+- 📱 Mobile Theme Builder
+
+---
+
+# 📄 License
+
+Released under the **MIT License**.
+
+---
+
+<div align="center">
+
+# 👨‍💻 Tasnem Islam Prome
+
+### Frontend Developer • JavaScript Developer • Creative UI Engineer
+
+<p>
+
+<a href="https://github.com/tasnem-tech">
+
+<img src="https://img.shields.io/badge/GitHub-@tasnem--tech-black?style=for-the-badge&logo=github">
+
+</a>
+
+</p>
+
+⭐ **If you found this project useful, consider giving it a Star!**
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:06B6D4,50:7C3AED,100:0F172A&height=120&section=footer"/>
+
+</div>
